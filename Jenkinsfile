@@ -1,6 +1,6 @@
 
   node {
-  
+  def root = tool name: 'go 1.10', type: 'go'
    withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}", "GOROOT=${root}", "PATH+GO=${root}/bin"]) {
        stage("Test") {
         checkout scm
