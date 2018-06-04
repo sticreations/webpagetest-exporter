@@ -8,9 +8,9 @@ import (
 
 	"github.com/sticreations/test-go-webpacktest"
 
+	"git.evb2.net/medusa/webpagetest-exporter/exporter"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
-	"github.com/sticreations/webpagetest-exporter/exporter"
 )
 
 type ResultListener func(*webpagetest.ResultData) error
