@@ -1,7 +1,7 @@
 
-
+  node {
 ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/") {
-    node {
+  
    withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
        stage("Test") {
         checkout scm
