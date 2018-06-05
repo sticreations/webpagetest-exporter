@@ -19,68 +19,68 @@ var (
 	}, metricsLabels)
 
 	bytesOut = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
+		Name: "webspeed_bytesOut",
 		Help: "WebpageTest Bytes Out",
 	}, metricsLabels)
 
 	bytesIn = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
+		Name: "webspeed_bytesIn",
 		Help: "WebpageTest Bytes In",
 	}, metricsLabels)
 
 	chromeTimingRedirectStart = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingRedirectStart",
+		Help: "WebpageTest chromeTimingRedirectStart",
 	}, metricsLabels)
 
 	chromeTimingRedirectEnd = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingRedirectEnd",
+		Help: "WebpageTest chromeTimingRedirectEnd",
 	}, metricsLabels)
 
 	chromeTimingFetchStart = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingFetchStart",
+		Help: "WebpageTest chromeTimingFetchStart",
 	}, metricsLabels)
 
 	chromeTimingResponseEnd = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingResponseEnd",
+		Help: "WebpageTest chromeTimingResponseEnd",
 	}, metricsLabels)
 
 	chromeTimingDomLoading = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingDomLoading",
+		Help: "WebpageTest chromeTimingDomLoading",
 	}, metricsLabels)
 
 	chromeTimingDomComplete = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingDomComplete",
+		Help: "WebpageTest chromeTimingDomComplete",
 	}, metricsLabels)
 
 	chromeTimingFirstPaint = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingFirstPaint",
+		Help: "WebpageTest chromeTimingFirstPaint",
 	}, metricsLabels)
 
 	chromeTimingDomInteractive = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_chromeTimingDomInteractive",
+		Help: "WebpageTest chromeTimingDomInteractive",
 	}, metricsLabels)
 
 	fullyLoaded = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_fullyLoaded",
+		Help: "WebpageTest fullyLoaded",
 	}, metricsLabels)
 
 	domElements = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_domElements",
+		Help: "WebpageTest domElements",
 	}, metricsLabels)
 
 	requestCount = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "webspeed_loadTime",
-		Help: "WebpageTest Bytes In",
+		Name: "webspeed_requestCount",
+		Help: "WebpageTest requestCount Per Run",
 	}, metricsLabels)
 )
 
@@ -106,15 +106,8 @@ func init() {
 func PrometheusMetricsListener(result *webpagetest.ResultData) error {
 	for _, run := range result.Runs {
 		writePrometheusData(run.FirstView, []string{result.URL, "first"})
-		writePrometheusData(run.RepeatView, []string{result.URL, "first"})
+		writePrometheusData(run.RepeatView, []string{result.URL, "repeated"})
 	}
-
-	if len(result.Runs) > 0 {
-		r := result.Runs["1"].FirstView
-		ttfbScore.WithLabelValues(result.URL).Set(float64(r.Steps[0].TTFB))
-	}
-
-	//	pageSpeedStaticResourceCount.WithLabelValues(result.Target, string(result.Strategy)).Set(float64(result.PageStats.NumberStaticResources))
 
 	return nil
 }

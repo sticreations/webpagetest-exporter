@@ -1,7 +1,6 @@
 package collector
 
 import (
-	"fmt"
 	"net/http"
 	"reflect"
 	"time"
@@ -35,7 +34,7 @@ func NewCollector(listenerAddress, wptApiKey string, target string, checkInterva
 }
 
 func (e *PagespeedCollector) Start() error {
-	startupMessage := "starting pagespeed exporter on listener %s for %d target(s) with re-check interval of %s"
+	startupMessage := "starting pagespeed exporter on listener %s for %v target(s) with re-check interval of %s"
 	log.Infof(startupMessage, e.listenerAddress, e.target, e.checkInterval)
 
 	s := &http.Server{
@@ -59,7 +58,6 @@ func (e *PagespeedCollector) registerListener(listener ResultListener) {
 }
 
 func (e *PagespeedCollector) watch() {
-	fmt.Print("IM WATCHING. I SWEAR")
 	wpt, err := webpagetest.NewClient("https://webpagetest.org")
 	if err != nil {
 		log.Error("Could not create WPT Client")
@@ -71,7 +69,7 @@ func (e *PagespeedCollector) watch() {
 			APIKey: e.apiKey,
 		}
 		rs, err := wpt.RunTestAndWait(*params, func(testId, status string, duration int) {
-			log.Printf("The testId is %v, STATUS: %v, Time wasted: %v", testId, status, duration)
+			log.Printf("The testId is %v, STATUS: %v, Time wasted: %v Seconds", testId, status, duration)
 		})
 
 		if err != nil {
