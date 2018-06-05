@@ -24,10 +24,10 @@ func main() {
 }
 
 func parseFlags() {
-	flag.StringVar(&wptApiKey, "api-key", getenv("PAGESPEED_API_KEY", ""), "sets the google API key used for pagespeed")
-	flag.StringVar(&listenerAddress, "listener", getenv("PAGESPEED_LISTENER", ":9271"), "sets the listener address for the exporters")
-	flag.StringVar(&target, "target", getenv("PAGESPEED_TARGETS", ""), "comma separated list of targets to measure")
-	intervalFlag := flag.String("interval", getenv("PAGESPEED_INTERVAL", "1h"), "check interval (e.g. 3s 4h 5d ...)")
+	flag.StringVar(&wptApiKey, "api-key", getenv("API_KEY", ""), "sets the google API key used for pagespeed")
+	flag.StringVar(&listenerAddress, "listener", getenv("LISTENER", ":9271"), "sets the listener address for the exporters")
+	flag.StringVar(&target, "target", getenv("TARGETS", ""), "comma separated list of targets to measure")
+	intervalFlag := flag.String("interval", getenv("INTERVAL", "1h"), "check interval (e.g. 3s 4h 5d ...)")
 
 	flag.Parse()
 
