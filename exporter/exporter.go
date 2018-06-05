@@ -2,7 +2,7 @@ package exporter
 
 import (
 	"github.com/prometheus/client_golang/prometheus"
-	webpagetest "github.com/sticreations/test-go-webpacktest"
+	webpagetest "github.com/sticreations/go-webpagetest"
 )
 
 var (

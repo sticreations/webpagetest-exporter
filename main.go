@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"git.evb2.net/medusa/webpagetest-exporter/collector"
+	"github.com/sticreations/webpagetest-exporter/collector"
 )
 
 var (
